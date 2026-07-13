@@ -1,0 +1,11 @@
+# List of servers to monitor (one per line)
+# Format: Hostname or IP Address
+# Lines starting with # are comments
+
+SRV-WEB01
+SRV-DB01
+192.168.1.30
+SRV-APP01
+SRV-DC01
+192.168.1.60
+SRV-EXCH01
