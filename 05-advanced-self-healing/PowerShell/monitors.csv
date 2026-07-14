@@ -1,0 +1,16 @@
+# Format: MonitorName,DatabaseType,ConnectionString,TableName,QueryCondition,CheckInterval,ThresholdCount,TimeWindowSeconds,ConditionOperator,ActionType,ActionTarget,ActionParameters,Severity,Enabled
+# DatabaseType: Oracle, SQLServer, MySQL, PostgreSQL, SQLite
+# ConnectionString: Use placeholders for credentials (stored in Credential Manager)
+# QueryCondition: SQL WHERE clause (e.g., "status='PENDING' AND created_date > SYSDATE - 2/1440")
+# ConditionOperator: GreaterThan, LessThan, GreaterThanOrEqual, LessThanOrEqual, Equal, NotEqual, Contains
+# ActionType: RestartIIS, EmailAlert, TeamsAlert, SlackAlert, ExecuteScript, ExecuteSQL
+# ActionTarget: For RestartIIS - SiteName/ApplicationPath, For Email - email address, etc.
+# ActionParameters: Additional parameters for the action
+
+OTP_Monitor,Oracle,Data Source=ORCL;User Id={USER};Password={PASSWORD};,OTP_REQUESTS,"status='PENDING' AND created_date > SYSDATE - 2/1440",60,100,120,GreaterThan,RestartIIS,MyWebsite/OTPService,RestartAppPool,CRITICAL,true
+Payment_Queue_Monitor,Oracle,Data Source=ORCL;User Id={USER};Password={PASSWORD};,PAYMENT_QUEUE,"status='PENDING' AND created_date > SYSDATE - 5/1440",120,500,300,GreaterThan,EmailAlert,admin@company.com,"Payment Queue Alert",CRITICAL,true
+Order_Processing_Monitor,SQLServer,Server=localhost;Database=Orders;User Id={USER};Password={PASSWORD};,ORDER_QUEUE,"status='PROCESSING' AND created_date > DATEADD(MINUTE, -10, GETDATE())",90,200,600,GreaterThan,TeamsAlert,https://yourcompany.webhook.office.com/webhookb2/xxxxx,Order Processing Alert,WARNING,true
+User_Session_Monitor,SQLServer,Server=localhost;Database=UserDB;User Id={USER};Password={PASSWORD};,USER_SESSIONS,"status='ACTIVE' AND last_activity > DATEADD(MINUTE, -15, GETDATE())",180,5000,900,GreaterThan,EmailAlert,admin@company.com,"High Active Sessions",WARNING,true
+Transaction_Monitor,MySQL,Server=localhost;Database=TransactionDB;Uid={USER};Pwd={PASSWORD};,TRANSACTIONS,"status='PENDING' AND created_date > DATE_SUB(NOW(), INTERVAL 2 MINUTE)",60,100,120,GreaterThan,RestartIIS,MyWebsite/TransactionService,RestartAppPool,CRITICAL,true
+Error_Log_Monitor,PostgreSQL,Host=localhost;Database=AppDB;Username={USER};Password={PASSWORD};,ERROR_LOGS,"severity='CRITICAL' AND created_at > NOW() - INTERVAL '5 minutes'",120,10,300,GreaterThan,SlackAlert,#infrastructure-alerts,High Error Rate,CRITICAL,true
+Performance_Monitor,Oracle,Data Source=ORCL;User Id={USER};Password={PASSWORD};,PERFORMANCE_METRICS,"cpu_usage > 90 AND timestamp > SYSDATE - 1/24",60,5,60,GreaterThan,ExecuteScript,C:\Scripts\ScaleUp.ps1,Scale Up Action,CRITICAL,true
