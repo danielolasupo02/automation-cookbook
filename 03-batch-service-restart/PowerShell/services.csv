@@ -1,0 +1,14 @@
+# Format: Name,Type,DisplayName,FilePath,WorkingDirectory,Arguments,CheckInterval,TimeoutThreshold,MaxRestarts,RestartDelay,HealthCheck,ActionOnFailure,LogOutput
+# Type: Process or Service
+# FilePath: Full path to the executable/batch file
+# WorkingDirectory: Directory to start the process in (optional)
+# Arguments: Command line arguments (optional)
+# HealthCheck: Optional command to verify health (optional)
+
+BatchProcessor,Process,Batch Data Processor,C:\BatchScripts\batchprocessor.bat,C:\BatchScripts,/run:data,60,3600,5,30,"Get-Process -Name *batchprocess*",Restart,true
+DataImportService,Service,Data Import Service,C:\Services\DataImport.exe,C:\Services,--service,120,3600,3,45,"Get-Service DataImportSvc",Restart,true
+ReportGenerator,Process,Report Generation Service,C:\BatchScripts\reportgen.exe,C:\BatchScripts,--generate daily,90,2700,3,60,"Get-Process -Name *reportgen*",Restart,true
+ETLProcessor,Process,ETL Batch Processor,C:\ETL\etlprocessor.exe,C:\ETL,--mode full,60,5400,5,30,"Get-Process -Name *etl*",Restart,true
+FileMonitor,Service,File Monitoring Service,C:\Services\FileMonitor.exe,C:\Services,--monitor,180,7200,2,60,"Get-Service FileMonitorSvc",Restart,true
+EmailProcessor,Process,Email Batch Processor,C:\BatchScripts\emailprocess.exe,C:\BatchScripts,--queue process,120,3600,4,45,"Get-Process -Name *emailprocess*",Restart,true
+ICADBatch,Process,ICAD Service Batch,C:\BatchScripts\icadservice.bat,C:\BatchScripts,/run:icad,60,3600,3,30,"Get-Process -Name *icad*",Restart,true
