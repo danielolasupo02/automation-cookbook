@@ -1,0 +1,17 @@
+# Format: PolicyName,Path,Pattern,RetentionPeriod,RetentionUnit,Action,ArchivePath,Compress,ExcludePatterns,Enabled,NotifyOnAction
+# RetentionUnit: Days, Weeks, Months, Years
+# Action: Delete, Archive, Compress, Move
+# Pattern: File pattern (e.g., *.log, *.txt, app-*.log)
+# ArchivePath: Where to archive files (only for Archive action)
+# ExcludePatterns: Comma-separated patterns to exclude
+
+ApplicationLogs,C:\Logs\Applications,*.log,30,Days,Delete,,false,*,true,true
+IISLogs,C:\inetpub\logs\LogFiles,W3SVC*.log,90,Days,Delete,,false,*,true,true
+SystemLogs,C:\Windows\System32\LogFiles,*.log,30,Days,Archive,C:\Archives\SystemLogs,true,*.etl,true,true
+WebLogs,C:\Logs\Web,access-*.log,7,Days,Compress,C:\Archives\WebLogs,true,error-*.log,true,true
+ErrorLogs,C:\Logs\Web,error-*.log,30,Days,Delete,,false,*,true,true
+DataExportLogs,C:\Logs\DataExport,dataexport-*.log,3,Months,Archive,C:\Archives\DataExport,true,*.tmp,true,true
+BackupLogs,C:\Logs\Backup,backup-*.log,1,Years,Archive,C:\Archives\BackupLogs,true,*.old,true,true
+TempFiles,C:\Temp,*.tmp,7,Days,Delete,,false,*,true,false
+AuditLogs,C:\Logs\Audit,audit-*.log,90,Days,Compress,C:\Archives\AuditLogs,true,*,true,true
+CustomLogs,C:\Logs\Custom,app-*.log,30,Days,Move,C:\Archives\OldLogs,false,important-*.log,true,false
