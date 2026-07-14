@@ -1,0 +1,12 @@
+# Format: JobName,JobType,ScriptPath,Parameters,Schedule,ScheduleDetails,Enabled,RetryCount,RetryDelay,Timeout,NotificationEmail
+# JobType: PowerShell, Cmd, Python
+# Schedule: Daily, Weekly, Monthly, Yearly, Hourly, Custom
+# ScheduleDetails: For Daily: HH:mm (e.g., 08:00), For Weekly: Day,HH:mm (e.g., Monday,08:00), For Monthly: Day,HH:mm (e.g., 15,08:00), For Hourly: Minutes (e.g., 30), For Custom: Cron expression (e.g., 0 8 * * 1-5)
+
+DailyEmailReport,PowerShell,C:\Scripts\DailyReport.ps1,"-Format HTML -SendEmail $true",Daily,08:00,true,3,60,300,admin@company.com
+WeeklyBackup,PowerShell,C:\Scripts\Backup.ps1,"-Type Full -Compress",Weekly,Monday,02:00,true,2,120,600,admin@company.com
+MonthlyCleanup,PowerShell,C:\Scripts\Cleanup.ps1,"-ArchiveOldFiles $true",Monthly,1,03:00,true,2,180,900,admin@company.com
+HourlyHealthCheck,PowerShell,C:\Scripts\HealthCheck.ps1,"-SendAlert $false",Hourly,30,true,1,30,120,admin@company.com
+BusinessDayEmail,PowerShell,C:\Scripts\BusinessDayReport.ps1,"-Recipients team@company.com",Custom,0 8 * * 1-5,true,3,60,300,team@company.com
+NightlySync,PowerShell,C:\Scripts\SyncData.ps1,"-Source ServerA -Target ServerB",Daily,23:30,true,3,120,600,admin@company.com
+WeekendMaintenance,PowerShell,C:\Scripts\Maintenance.ps1,"-OptimizeDB",Weekly,Saturday,00:00,true,2,180,1200,admin@company.com
