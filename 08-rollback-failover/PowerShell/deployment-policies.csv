@@ -1,0 +1,12 @@
+# Format: PolicyName,DeploymentType,DeploymentPath,HealthCheckURL,ExpectedResponse,RollbackScript,FailoverScript,MaxRetries,RetryInterval,CheckInterval,TimeoutSeconds,AlertEmail,Enabled
+# DeploymentType: WebApp, API, Database, Service, Custom
+# HealthCheckURL: URL to check for health after deployment
+# ExpectedResponse: Expected status code or text
+# RollbackScript: Script to run for rollback
+# FailoverScript: Script to run for failover
+
+WebApp_Deployment,WebApp,C:\Deployments\WebApp,http://localhost/WebApp/health,OK,C:\Rollback\webapp-rollback.ps1,C:\Failover\webapp-failover.ps1,3,60,60,300,admin@company.com,true
+API_Deployment,API,C:\Deployments\API,http://localhost/API/health,Healthy,C:\Rollback\api-rollback.ps1,C:\Failover\api-failover.ps1,3,60,60,300,admin@company.com,true
+Database_Deployment,Database,C:\Deployments\Database,http://localhost/DB/status,Connected,C:\Rollback\db-rollback.ps1,C:\Failover\db-failover.ps1,2,120,120,600,admin@company.com,true
+Service_Deployment,Service,C:\Deployments\Service,http://localhost/Service/health,Running,C:\Rollback\service-rollback.ps1,C:\Failover\service-failover.ps1,3,60,60,300,admin@company.com,true
+Custom_Deployment,Custom,C:\Deployments\Custom,http://localhost/Custom/status,OK,C:\Rollback\custom-rollback.ps1,C:\Failover\custom-failover.ps1,3,60,90,600,admin@company.com,true
