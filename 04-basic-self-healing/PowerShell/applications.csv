@@ -1,0 +1,12 @@
+# Format: SiteName,ApplicationPath,CheckInterval,RestartMethod,HealthCheckURL,ExpectedResponse,MaxRestarts,ActionOnFailure
+# ApplicationPath: The virtual path (e.g., /MyApp, /)
+# RestartMethod: AppPool, ApplicationPool, Site, or All
+# HealthCheckURL: URL to check for health (optional)
+# ExpectedResponse: Expected HTTP status code or text (optional)
+
+MyWebsite,/MyApp,60,AppPool,http://localhost/MyApp/health,OK,5,Restart
+MyWebsite,/API,60,ApplicationPool,http://localhost/API/health,OK,3,Restart
+MyWebsite,/,120,Site,http://localhost/,200,3,Restart
+IntranetPortal,/Portal,60,AppPool,http://localhost/Portal,200,5,Restart
+ReportingService,/Reports,90,ApplicationPool,http://localhost/Reports,200,3,Restart
+APIGateway,/Gateway,60,AppPool,http://localhost/Gateway/status,Healthy,5,Restart
